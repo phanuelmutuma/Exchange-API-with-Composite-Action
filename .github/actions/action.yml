@@ -1,1 +1,21 @@
 
+name: 'Exchange Api'
+description: 'Exchange-API-with-Composite-Action'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Check out repo
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Download Feed
+      run: |-
+        curl -X GET https://v6.exchangerate-api.com/v6/${{ secrets.EXCHANGE }}/latest/USD -o availableLanguages.json
+    - name: Commit and push changes
+      run: |-
+        git diff
+        git config user.name "Phanuel Mutuma"
+        git config user.email "phanuelmutuma@gmail.com"
+        git diff --quiet || (git add -A && git commit -m "Updated with latest")
+        git push
