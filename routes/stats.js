@@ -7,7 +7,7 @@ const router = express.Router();
 
 const getCurrency = async (req, res, next) => {
     try {
-        const data = fs.readFileSync(path.join(__dirname, "./" + req.params.type + ".json"));
+        const data = fs.readFileSync(path.join(__dirname, "../" + req.params.type + ".json"));
         const stats = JSON.parse(data);
         const convert_rate = req.params.convert;
         const conversion_rates_uppercase = convert_rate.toUpperCase();
