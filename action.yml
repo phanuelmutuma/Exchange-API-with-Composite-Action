@@ -8,13 +8,23 @@ runs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - name: Download Feed
+    - name: Download USD Feed
       run: |-
-        curl -X GET https://v6.exchangerate-api.com/v6/${{ secrets.EXCHANGE }}/latest/USD -o availableLanguages.json
+        curl -X GET https://v6.exchangerate-api.com/v6/ffdaa8e88282e3efa30ae892/latest/USD -o usd.json
+      shell: bash
+    - name: Download KES Feed
+      run: |-
+        curl -X GET https://v6.exchangerate-api.com/v6/ffdaa8e88282e3efa30ae892/latest/KES -o kes.json
+      shell: bash
+    - name: Download NGN Feed
+      run: |-
+        curl -X GET https://v6.exchangerate-api.com/v6/ffdaa8e88282e3efa30ae892/latest/NGN -o ngn.json
+      shell: bash
     - name: Commit and push changes
       run: |-
-        git diff
         git config user.name "Phanuel Mutuma"
         git config user.email "phanuelmutuma@gmail.com"
-        git diff --quiet || (git add -A && git commit -m "Updated with latest")
+        git add usd.json, kes.json, ngn.json
+        git commit -m "Updated Today..."
         git push
+      shell: bash
