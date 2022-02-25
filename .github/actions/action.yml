@@ -30,6 +30,8 @@ runs:
       shell: bash
     - name: Commit and push changes
       run: |-
+        git config user.name "Phanuel Mutuma"
+        git config user.email "phanuelmutuma@gmail.com"
         git add usd.json kes.json ngn.json
         git commit -m "Updated Today..."
         git push
