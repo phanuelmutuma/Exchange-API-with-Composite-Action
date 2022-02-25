@@ -20,11 +20,18 @@ runs:
       run: |-
         curl -X GET https://v6.exchangerate-api.com/v6/ffdaa8e88282e3efa30ae892/latest/NGN -o ngn.json
       shell: bash
-    - name: Commit and push changes
+    - name: Remove and push changes
       run: |-
         git config user.name "Phanuel Mutuma"
         git config user.email "phanuelmutuma@gmail.com"
+        git rm usd.json kes.json ngn.json
+        git commit -m "Removing Files..."
+        git push
+      shell: bash
+    - name: Commit and push changes
+      run: |-
         git add usd.json kes.json ngn.json
         git commit -m "Updated Today..."
         git push
       shell: bash
+      
